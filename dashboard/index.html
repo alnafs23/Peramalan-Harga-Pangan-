@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard Peramalan Harga Sembako & Fintech P2P Lending</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Plotly.js/2.27.0/plotly.min.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', -apple-system, sans-serif;
+    background: #0f1419;
+    color: #e6e6e6;
+    margin: 0;
+    padding: 24px;
+  }
+  h1 { font-size: 22px; margin-bottom: 4px; }
+  .subtitle { color: #9aa5b1; margin-bottom: 24px; font-size: 14px; }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .card {
+    background: #1a2129;
+    border-radius: 10px;
+    padding: 16px;
+    border: 1px solid #2a333d;
+  }
+  .card.full { grid-column: 1 / -1; }
+  .card h3 { margin: 0 0 8px 0; font-size: 15px; color: #d1d9e0; }
+  select {
+    background: #232b34; color: #e6e6e6; border: 1px solid #354150;
+    border-radius: 6px; padding: 6px 10px; font-size: 13px; margin-bottom: 10px;
+  }
+  .kpi-row { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+  .kpi {
+    background: #1a2129; border: 1px solid #2a333d; border-radius: 10px;
+    padding: 14px 20px; flex: 1; min-width: 180px;
+  }
+  .kpi .label { font-size: 12px; color: #9aa5b1; }
+  .kpi .value { font-size: 22px; font-weight: 600; margin-top: 4px; }
+  .kpi .value.up { color: #ff6b6b; }
+  .kpi .value.down { color: #51cf66; }
+  footer { margin-top: 24px; font-size: 12px; color: #6b7280; text-align: center; }
+</style>
+</head>
+<body>
+
+<h1>Dashboard Peramalan Harga Sembako</h1>
+<div class="subtitle">Data harga pangan nasional (Badan Pangan Nasional) & statistik fintech P2P lending (OJK) &mdash; Jan 2024 - Des 2025</div>
+
+<div class="kpi-row" id="kpiRow"></div>
+
+<div class="grid">
+  <div class="card full">
+    <h3>Tren Harga Komoditas</h3>
+    <select id="komoditasSelect"></select>
+    <div id="trendChart" style="height:360px;"></div>
+  </div>
+
+  <div class="card">
+    <h3>Volatilitas Harga (Coefficient of Variation)</h3>
+    <div id="volChart" style="height:340px;"></div>
+  </div>
+
+  <div class="card">
+    <h3>TWP90 Fintech P2P Lending (%)</h3>
+    <div id="ojkChart" style="height:340px;"></div>
+  </div>
+
+  <div class="card full">
+    <h3>Penyaluran Pinjaman Fintech ke Sektor Pertanian (Miliar Rp)</h3>
+    <div id="pertanianChart" style="height:320px;"></div>
+  </div>
+</div>
+
+<footer>Dibuat dengan data Open Data Badan Pangan Nasional &amp; Statistik LPBBTI OJK. Untuk keperluan portofolio analisis data.</footer>
+
+<script>
+const rawData = [{"tahun": 2024, "bulan": "Januari", "beras_premium": 15217, "beras_medium": 13411, "bawang_merah": 37119, "bawang_putih": 38980, "cabai_merah_keriting": 52611, "cabai_rawit_merah": 56640, "daging_sapi": 135059, "daging_ayam": 36139, "telur_ayam": 28445, "gula_pasir": 17414, "minyak_goreng_kemasan": 17465, "ojk_tkb90": 0.9704787216, "ojk_twp90": 0.0295212784, "ojk_roa": -0.0192863554, "ojk_roe": -0.0376314792, "ojk_bopo": 0.9586798609, "ojk_penyaluran_pertanian_miliar": 295.668858157, "periode_label": "Jan 2024"}, {"tahun": 2024, "bulan": "Februari", "beras_premium": 16047, "beras_medium": 14081, "bawang_merah": 34605, "bawang_putih": 39090, "cabai_merah_keriting": 62045, "cabai_rawit_merah": 58265, "daging_sapi": 134921, "daging_ayam": 36997, "telur_ayam": 29413, "gula_pasir": 17630, "minyak_goreng_kemasan": 17647, "ojk_tkb90": 0.9705392919, "ojk_twp90": 0.0294607081, "ojk_roa": -0.0136074148, "ojk_roe": -0.0263422041, "ojk_bopo": 0.9294537607, "ojk_penyaluran_pertanian_miliar": 341.787110353, "periode_label": "Feb 2024"}, {"tahun": 2024, "bulan": "Maret", "beras_premium": 16517, "beras_medium": 14370, "bawang_merah": 34895, "bawang_putih": 41118, "cabai_merah_keriting": 58651, "cabai_rawit_merah": 59817, "daging_sapi": 136142, "daging_ayam": 38512, "telur_ayam": 31923, "gula_pasir": 17904, "minyak_goreng_kemasan": 19060, "ojk_tkb90": 0.9705828869, "ojk_twp90": 0.0294171131, "ojk_roa": -0.0037561509, "ojk_roe": -0.0071969111, "ojk_bopo": 0.9173513447, "ojk_penyaluran_pertanian_miliar": 410.669648896, "periode_label": "Mar 2024"}, {"tahun": 2024, "bulan": "April", "beras_premium": 16102, "beras_medium": 13880, "bawang_merah": 47804, "bawang_putih": 43647, "cabai_merah_keriting": 49095, "cabai_rawit_merah": 53110, "daging_sapi": 137824, "daging_ayam": 38884, "telur_ayam": 30960, "gula_pasir": 18145, "minyak_goreng_kemasan": 19187, "ojk_tkb90": 0.9720689655, "ojk_twp90": 0.0279310345, "ojk_roa": 0.0237349333, "ojk_roe": 0.0448905365, "ojk_bopo": 0.8773249898, "ojk_penyaluran_pertanian_miliar": 222.56238726, "periode_label": "Apr 2024"}, {"tahun": 2024, "bulan": "Mei", "beras_premium": 15623, "beras_medium": 13562, "bawang_merah": 48659, "bawang_putih": 43448, "cabai_merah_keriting": 48650, "cabai_rawit_merah": 47795, "daging_sapi": 136400, "daging_ayam": 38513, "telur_ayam": 30731, "gula_pasir": 18435, "minyak_goreng_kemasan": 19098, "ojk_tkb90": 0.9708627416, "ojk_twp90": 0.0291372584, "ojk_roa": 0.0378482956, "ojk_roe": 0.0702234856, "ojk_bopo": 0.8575206391, "ojk_penyaluran_pertanian_miliar": 389.834886743, "periode_label": "Mei 2024"}, {"tahun": 2024, "bulan": "Juni", "beras_premium": 15521, "beras_medium": 13480, "bawang_merah": 43426, "bawang_putih": 42582, "cabai_merah_keriting": 54357, "cabai_rawit_merah": 51599, "daging_sapi": 136598, "daging_ayam": 37493, "telur_ayam": 30158, "gula_pasir": 18261, "minyak_goreng_kemasan": 19078, "ojk_tkb90": 0.9721368302, "ojk_twp90": 0.0278631698, "ojk_roa": 0.044980089, "ojk_roe": 0.084703766, "ojk_bopo": 0.8649674213, "ojk_penyaluran_pertanian_miliar": 390.269427934, "periode_label": "Jun 2024"}, {"tahun": 2024, "bulan": "Juli", "beras_premium": 15582, "beras_medium": 13598, "bawang_merah": 33616, "bawang_putih": 40851, "cabai_merah_keriting": 47255, "cabai_rawit_merah": 60762, "daging_sapi": 136056, "daging_ayam": 36316, "telur_ayam": 29655, "gula_pasir": 18083, "minyak_goreng_kemasan": 19190, "ojk_tkb90": 0.9746941264, "ojk_twp90": 0.0253058736, "ojk_roa": 0.0498735747, "ojk_roe": 0.0943551792, "ojk_bopo": 0.9061940843, "ojk_penyaluran_pertanian_miliar": 413.490295259, "periode_label": "Jul 2024"}, {"tahun": 2024, "bulan": "Agustus", "beras_premium": 15606, "beras_medium": 13643, "bawang_merah": 27097, "bawang_putih": 40258, "cabai_merah_keriting": 46252, "cabai_rawit_merah": 63725, "daging_sapi": 136007, "daging_ayam": 35809, "telur_ayam": 29069, "gula_pasir": 18003, "minyak_goreng_kemasan": 18195, "ojk_tkb90": 0.9762435578, "ojk_twp90": 0.0237564422, "ojk_roa": 0.0811003517, "ojk_roe": 0.1456516639, "ojk_bopo": 0.8898452715, "ojk_penyaluran_pertanian_miliar": 371.071132929, "periode_label": "Agu 2024"}, {"tahun": 2024, "bulan": "September", "beras_premium": 15582, "beras_medium": 13627, "bawang_merah": 27458, "bawang_putih": 39960, "cabai_merah_keriting": 38206, "cabai_rawit_merah": 48753, "daging_sapi": 135632, "daging_ayam": 35319, "telur_ayam": 28662, "gula_pasir": 17862, "minyak_goreng_kemasan": 18223, "ojk_tkb90": 0.9762489061, "ojk_twp90": 0.0237510939, "ojk_roa": 0.0991230106, "ojk_roe": 0.1790721035, "ojk_bopo": 0.8882526417, "ojk_penyaluran_pertanian_miliar": 322.973163989, "periode_label": "Sep 2024"}, {"tahun": 2024, "bulan": "Oktober", "beras_premium": 15545, "beras_medium": 13606, "bawang_merah": 29985, "bawang_putih": 40203, "cabai_merah_keriting": 33637, "cabai_rawit_merah": 47263, "daging_sapi": 135503, "daging_ayam": 36127, "telur_ayam": 28847, "gula_pasir": 17978, "minyak_goreng_kemasan": 18336, "ojk_tkb90": 0.9763315664, "ojk_twp90": 0.0236684336, "ojk_roa": 0.1362252188, "ojk_roe": 0.2362228302, "ojk_bopo": 0.8770417955, "ojk_penyaluran_pertanian_miliar": 338.258405019, "periode_label": "Okt 2024"}, {"tahun": 2024, "bulan": "November", "beras_premium": 15491, "beras_medium": 13534, "bawang_merah": 37628, "bawang_putih": 41214, "cabai_merah_keriting": 31690, "cabai_rawit_merah": 42951, "daging_sapi": 135508, "daging_ayam": 36778, "telur_ayam": 28716, "gula_pasir": 17993, "minyak_goreng_kemasan": 18485, "ojk_tkb90": 0.9748294264, "ojk_twp90": 0.0251705736, "ojk_roa": 0.1510848868, "ojk_roe": 0.2651464392, "ojk_bopo": 0.874043171, "ojk_penyaluran_pertanian_miliar": 364.153003777, "periode_label": "Nov 2024"}, {"tahun": 2024, "bulan": "Desember", "beras_premium": 15474, "beras_medium": 13518, "bawang_merah": 40850, "bawang_putih": 42574, "cabai_merah_keriting": 38610, "cabai_rawit_merah": 47066, "daging_sapi": 135781, "daging_ayam": 37469, "telur_ayam": 29950, "gula_pasir": 18021, "minyak_goreng_kemasan": 18783, "ojk_tkb90": 0.9739589176, "ojk_twp90": 0.0260410824, "ojk_roa": 0.1911512685, "ojk_roe": 0.3255294693, "ojk_bopo": 0.8629900209, "ojk_penyaluran_pertanian_miliar": 452.883668827, "periode_label": "Des 2024"}, {"tahun": 2025, "bulan": "Januari", "beras_premium": 15442, "beras_medium": 13546, "bawang_merah": 39040, "bawang_putih": 42525, "cabai_merah_keriting": 56445, "cabai_rawit_merah": 74250, "daging_sapi": 135258, "daging_ayam": 37495, "telur_ayam": 29859, "gula_pasir": 18098, "minyak_goreng_kemasan": 19963, "ojk_tkb90": 0.9747931284, "ojk_twp90": 0.0252068716, "ojk_roa": 0.0166222835, "ojk_roe": 0.0293207665, "ojk_bopo": 0.8577374526, "ojk_penyaluran_pertanian_miliar": 383.989007502, "periode_label": "Jan 2025"}, {"tahun": 2025, "bulan": "Februari", "beras_premium": 15500, "beras_medium": 13613, "bawang_merah": 35844, "bawang_putih": 42696, "cabai_merah_keriting": 52937, "cabai_rawit_merah": 68786, "daging_sapi": 134708, "daging_ayam": 35981, "telur_ayam": 29440, "gula_pasir": 18331, "minyak_goreng_kemasan": 20426, "ojk_tkb90": 0.972220282, "ojk_twp90": 0.027779718, "ojk_roa": 0.2180078196, "ojk_roe": 0.2676980645, "ojk_bopo": 0.8867389893, "ojk_penyaluran_pertanian_miliar": 475.267823617, "periode_label": "Feb 2025"}, {"tahun": 2025, "bulan": "Maret", "beras_premium": 15545, "beras_medium": 13696, "bawang_merah": 41458, "bawang_putih": 43839, "cabai_merah_keriting": 52791, "cabai_rawit_merah": 85030, "daging_sapi": 136146, "daging_ayam": 36400, "telur_ayam": 29665, "gula_pasir": 18513, "minyak_goreng_kemasan": 20621, "ojk_tkb90": 0.9722716354, "ojk_twp90": 0.0277283646, "ojk_roa": 0.4827115382, "ojk_roe": 0.6648464808, "ojk_bopo": 0.7788413021, "ojk_penyaluran_pertanian_miliar": 448.003458298, "periode_label": "Mar 2025"}, {"tahun": 2025, "bulan": "April", "beras_premium": 15563, "beras_medium": 13715, "bawang_merah": 44516, "bawang_putih": 44750, "cabai_merah_keriting": 58560, "cabai_rawit_merah": 77710, "daging_sapi": 136153, "daging_ayam": 35420, "telur_ayam": 29149, "gula_pasir": 18547, "minyak_goreng_kemasan": 20694, "ojk_tkb90": 0.9707034327, "ojk_twp90": 0.0292965673, "ojk_roa": 0.2468027445, "ojk_roe": 0.3162575495, "ojk_bopo": 0.8736283683, "ojk_penyaluran_pertanian_miliar": 357.605292467, "periode_label": "Apr 2025"}, {"tahun": 2025, "bulan": "Mei", "beras_premium": 15595, "beras_medium": 13762, "bawang_merah": 39639, "bawang_putih": 42519, "cabai_merah_keriting": 49512, "cabai_rawit_merah": 52738, "daging_sapi": 135461, "daging_ayam": 34814, "telur_ayam": 29108, "gula_pasir": 18547, "minyak_goreng_kemasan": 20798, "ojk_tkb90": 0.9680984687, "ojk_twp90": 0.0319015313, "ojk_roa": 0.266007795, "ojk_roe": 0.3481537174, "ojk_bopo": 0.8680717561, "ojk_penyaluran_pertanian_miliar": 407.563737234, "periode_label": "Mei 2025"}, {"tahun": 2025, "bulan": "Juni", "beras_premium": 15747, "beras_medium": 13996, "bawang_merah": 42262, "bawang_putih": 39909, "cabai_merah_keriting": 44444, "cabai_rawit_merah": 54705, "daging_sapi": 135375, "daging_ayam": 35034, "telur_ayam": 29239, "gula_pasir": 18469, "minyak_goreng_kemasan": 20834, "ojk_tkb90": 0.9715253892, "ojk_twp90": 0.0284746108, "ojk_roa": 0.2842559082, "ojk_roe": 0.3785127505, "ojk_bopo": 0.8569585663, "ojk_penyaluran_pertanian_miliar": 239.664396311, "periode_label": "Jun 2025"}, {"tahun": 2025, "bulan": "Juli", "beras_premium": 16045, "beras_medium": 14301, "bawang_merah": 46281, "bawang_putih": 39075, "cabai_merah_keriting": 44707, "cabai_rawit_merah": 64351, "daging_sapi": 135098, "daging_ayam": 35391, "telur_ayam": 29469, "gula_pasir": 18350, "minyak_goreng_kemasan": 20844, "ojk_tkb90": 0.9728590911, "ojk_twp90": 0.0271409089, "ojk_roa": 0.3033858575, "ojk_roe": 0.4095184545, "ojk_bopo": 0.8536830983, "ojk_penyaluran_pertanian_miliar": 352.361788826, "periode_label": "Jul 2025"}, {"tahun": 2025, "bulan": "Agustus", "beras_premium": 16194, "beras_medium": 14354, "bawang_merah": 51250, "bawang_putih": 38386, "cabai_merah_keriting": 42521, "cabai_rawit_merah": 49028, "daging_sapi": 135082, "daging_ayam": 35404, "telur_ayam": 29564, "gula_pasir": 18254, "minyak_goreng_kemasan": 20881, "ojk_tkb90": 0.9742764338, "ojk_twp90": 0.0257235662, "ojk_roa": 0.3153796854, "ojk_roe": 0.42762355, "ojk_bopo": 0.8489047474, "ojk_penyaluran_pertanian_miliar": 380.846593889, "periode_label": "Agu 2025"}, {"tahun": 2025, "bulan": "September", "beras_premium": 16080, "beras_medium": 13945, "bawang_merah": 41919, "bawang_putih": 37607, "cabai_merah_keriting": 54876, "cabai_rawit_merah": 47269, "daging_sapi": 135132, "daging_ayam": 37569, "telur_ayam": 29778, "gula_pasir": 18151, "minyak_goreng_kemasan": 20922, "ojk_tkb90": 0.9718297014, "ojk_twp90": 0.0281702986, "ojk_roa": 0.3214718851, "ojk_roe": 0.4416855954, "ojk_bopo": 0.8469905377, "ojk_penyaluran_pertanian_miliar": 421.689551784, "periode_label": "Sep 2025"}, {"tahun": 2025, "bulan": "Oktober", "beras_premium": 15926, "beras_medium": 13823, "bawang_merah": 38892, "bawang_putih": 37132, "cabai_merah_keriting": 56260, "cabai_rawit_merah": 43173, "daging_sapi": 135134, "daging_ayam": 38037, "telur_ayam": 30437, "gula_pasir": 18051, "minyak_goreng_kemasan": 20956, "ojk_tkb90": 0.9724095928, "ojk_twp90": 0.0275904072, "ojk_roa": 0.3129956276, "ojk_roe": 0.4250702214, "ojk_bopo": 0.8508452571, "ojk_penyaluran_pertanian_miliar": 436.022141974, "periode_label": "Okt 2025"}, {"tahun": 2025, "bulan": "November", "beras_premium": 15572, "beras_medium": 13564, "bawang_merah": 39873, "bawang_putih": 36829, "cabai_merah_keriting": 53794, "cabai_rawit_merah": 41694, "daging_sapi": 135170, "daging_ayam": 37628, "telur_ayam": 30525, "gula_pasir": 17993, "minyak_goreng_kemasan": 20939, "ojk_tkb90": 0.9567393717, "ojk_twp90": 0.0432606283, "ojk_roa": 0.3142790531, "ojk_roe": 0.4270800622, "ojk_bopo": 0.8511850386, "ojk_penyaluran_pertanian_miliar": 325.749929864, "periode_label": "Nov 2025"}, {"tahun": 2025, "bulan": "Desember", "beras_premium": 15549, "beras_medium": 13540, "bawang_merah": 47236, "bawang_putih": 37823, "cabai_merah_keriting": 57503, "cabai_rawit_merah": 67666, "daging_sapi": 135300, "daging_ayam": 39810, "telur_ayam": 31390, "gula_pasir": 18044, "minyak_goreng_kemasan": 20957, "ojk_tkb90": 0.9567981516, "ojk_twp90": 0.0432018484, "ojk_roa": 0.2843016432, "ojk_roe": 0.3728663956, "ojk_bopo": 0.867273224, "ojk_penyaluran_pertanian_miliar": 405.978139823, "periode_label": "Des 2025"}];
+
+const komoditasList = {
+  'beras_premium': 'Beras Premium', 'beras_medium': 'Beras Medium',
+  'bawang_merah': 'Bawang Merah', 'bawang_putih': 'Bawang Putih',
+  'cabai_merah_keriting': 'Cabai Merah Keriting', 'cabai_rawit_merah': 'Cabai Rawit Merah',
+  'daging_sapi': 'Daging Sapi', 'daging_ayam': 'Daging Ayam',
+  'telur_ayam': 'Telur Ayam', 'gula_pasir': 'Gula Pasir',
+  'minyak_goreng_kemasan': 'Minyak Goreng Kemasan'
+};
+
+const labels = rawData.map(d => d.periode_label);
+const darkLayout = {
+  paper_bgcolor: '#1a2129', plot_bgcolor: '#1a2129',
+  font: { color: '#d1d9e0', size: 11 },
+  margin: { t: 10, r: 20, l: 55, b: 60 },
+  xaxis: { gridcolor: '#2a333d' },
+  yaxis: { gridcolor: '#2a333d' }
+};
+
+const kpiRow = document.getElementById('kpiRow');
+const kpiKomoditas = ['cabai_rawit_merah','beras_premium','bawang_merah','minyak_goreng_kemasan'];
+kpiKomoditas.forEach(k => {
+  const last = rawData[rawData.length-1][k];
+  const prev = rawData[rawData.length-2][k];
+  const pct = ((last-prev)/prev*100).toFixed(1);
+  const cls = pct >= 0 ? 'up' : 'down';
+  const arrow = pct >= 0 ? '▲' : '▼';
+  kpiRow.innerHTML += `<div class="kpi">
+    <div class="label">${komoditasList[k]} (Des 2025)</div>
+    <div class="value">Rp ${last.toLocaleString('id-ID')}</div>
+    <div class="value ${cls}" style="font-size:13px;">${arrow} ${Math.abs(pct)}% vs bulan lalu</div>
+  </div>`;
+});
+
+const select = document.getElementById('komoditasSelect');
+Object.entries(komoditasList).forEach(([key, label]) => {
+  const opt = document.createElement('option');
+  opt.value = key; opt.textContent = label;
+  select.appendChild(opt);
+});
+select.value = 'cabai_rawit_merah';
+
+function drawTrend(key) {
+  const y = rawData.map(d => d[key]);
+  Plotly.newPlot('trendChart', [{
+    x: labels, y: y, type: 'scatter', mode: 'lines+markers',
+    line: {color: '#ff922b', width: 2}, marker: {size: 5}
+  }], {...darkLayout, yaxis: {...darkLayout.yaxis, title: 'Rp/kg'}});
+}
+drawTrend('cabai_rawit_merah');
+select.addEventListener('change', e => drawTrend(e.target.value));
+
+function stdev(arr) {
+  const m = arr.reduce((a,b)=>a+b,0)/arr.length;
+  return Math.sqrt(arr.reduce((a,b)=>a+(b-m)**2,0)/arr.length);
+}
+const cvData = Object.entries(komoditasList).map(([key, label]) => {
+  const vals = rawData.map(d => d[key]);
+  const mean = vals.reduce((a,b)=>a+b,0)/vals.length;
+  const cv = stdev(vals)/mean*100;
+  return {label, cv};
+}).sort((a,b) => a.cv - b.cv);
+
+Plotly.newPlot('volChart', [{
+  x: cvData.map(d => d.cv), y: cvData.map(d => d.label),
+  type: 'bar', orientation: 'h', marker: {color: '#51cf66'}
+}], {...darkLayout, xaxis: {...darkLayout.xaxis, title: 'CV (%)'}});
+
+Plotly.newPlot('ojkChart', [{
+  x: labels, y: rawData.map(d => d.ojk_twp90*100),
+  type: 'scatter', mode: 'lines+markers', line: {color: '#ff6b6b', width: 2}
+}], darkLayout);
+
+Plotly.newPlot('pertanianChart', [{
+  x: labels, y: rawData.map(d => d.ojk_penyaluran_pertanian_miliar),
+  type: 'bar', marker: {color: '#4dabf7'}
+}], darkLayout);
+</script>
+
+</body>
+</html>

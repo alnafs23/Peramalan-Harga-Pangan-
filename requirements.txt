@@ -1,0 +1,9 @@
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+
+# Opsional untuk pengembangan lanjutan (model SARIMA/SARIMAX):
+# statsmodels
+# prophet

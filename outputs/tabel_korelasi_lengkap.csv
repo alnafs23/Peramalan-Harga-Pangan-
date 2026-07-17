@@ -1,0 +1,199 @@
+komoditas,indikator_ojk,lag_bulan,korelasi
+Beras Premium,ojk_tkb90,0,0.05323084720738402
+Beras Premium,ojk_tkb90,1,-0.1150567441813987
+Beras Premium,ojk_tkb90,2,-0.5368686838552582
+Beras Premium,ojk_twp90,0,-0.05323084720738261
+Beras Premium,ojk_twp90,1,0.11505674418140079
+Beras Premium,ojk_twp90,2,0.5368686838552579
+Beras Premium,ojk_roa,0,0.032966829533502454
+Beras Premium,ojk_roa,1,-0.07060110230727858
+Beras Premium,ojk_roa,2,0.015281600838875746
+Beras Premium,ojk_roe,0,0.002559705788757505
+Beras Premium,ojk_roe,1,-0.13957818300601646
+Beras Premium,ojk_roe,2,-0.06387285731144929
+Beras Premium,ojk_bopo,0,-0.005563982377433925
+Beras Premium,ojk_bopo,1,0.3601589152453058
+Beras Premium,ojk_bopo,2,0.35445901080829584
+Beras Premium,ojk_penyaluran_pertanian_miliar,0,-0.06695795743694113
+Beras Premium,ojk_penyaluran_pertanian_miliar,1,-0.25816589720530386
+Beras Premium,ojk_penyaluran_pertanian_miliar,2,-0.39863106335797394
+Beras Medium,ojk_tkb90,0,0.1090710399654561
+Beras Medium,ojk_tkb90,1,-0.09548588582091555
+Beras Medium,ojk_tkb90,2,-0.5660969119095519
+Beras Medium,ojk_twp90,0,-0.10907103996545475
+Beras Medium,ojk_twp90,1,0.09548588582091824
+Beras Medium,ojk_twp90,2,0.566096911909554
+Beras Medium,ojk_roa,0,0.17675672531271855
+Beras Medium,ojk_roa,1,0.09699780144800253
+Beras Medium,ojk_roa,2,0.18072002616431282
+Beras Medium,ojk_roe,0,0.13397321466627873
+Beras Medium,ojk_roe,1,0.023509626153809055
+Beras Medium,ojk_roe,2,0.10387722207466113
+Beras Medium,ojk_bopo,0,-0.03950498088551461
+Beras Medium,ojk_bopo,1,0.24388983914277515
+Beras Medium,ojk_bopo,2,0.17287773646653856
+Beras Medium,ojk_penyaluran_pertanian_miliar,0,-0.105284647205997
+Beras Medium,ojk_penyaluran_pertanian_miliar,1,-0.27413272456093907
+Beras Medium,ojk_penyaluran_pertanian_miliar,2,-0.30367717291889407
+Bawang Merah,ojk_tkb90,0,-0.3471234572787142
+Bawang Merah,ojk_tkb90,1,-0.4509715182305972
+Bawang Merah,ojk_tkb90,2,-0.4244209519425546
+Bawang Merah,ojk_twp90,0,0.34712345727871036
+Bawang Merah,ojk_twp90,1,0.45097151823059406
+Bawang Merah,ojk_twp90,2,0.42442095194255686
+Bawang Merah,ojk_roa,0,0.3540315228750775
+Bawang Merah,ojk_roa,1,0.4307389606259893
+Bawang Merah,ojk_roa,2,0.2821037255119303
+Bawang Merah,ojk_roe,0,0.31319802687090853
+Bawang Merah,ojk_roe,1,0.39019021468734516
+Bawang Merah,ojk_roe,2,0.21715019643177647
+Bawang Merah,ojk_bopo,0,-0.4463359707108841
+Bawang Merah,ojk_bopo,1,-0.39951422355401656
+Bawang Merah,ojk_bopo,2,-0.056355627578254
+Bawang Merah,ojk_penyaluran_pertanian_miliar,0,-0.04613635751311227
+Bawang Merah,ojk_penyaluran_pertanian_miliar,1,-0.15674347815380665
+Bawang Merah,ojk_penyaluran_pertanian_miliar,2,-0.17591258315074645
+Bawang Putih,ojk_tkb90,0,0.3421298025073774
+Bawang Putih,ojk_tkb90,1,0.21316743115616335
+Bawang Putih,ojk_tkb90,2,0.10257927998059835
+Bawang Putih,ojk_twp90,0,-0.3421298025073759
+Bawang Putih,ojk_twp90,1,-0.2131674311561635
+Bawang Putih,ojk_twp90,2,-0.10257927998059703
+Bawang Putih,ojk_roa,0,-0.21452272478709483
+Bawang Putih,ojk_roa,1,-0.29000948801773563
+Bawang Putih,ojk_roa,2,-0.4902202595359869
+Bawang Putih,ojk_roe,0,-0.2027721059204579
+Bawang Putih,ojk_roe,1,-0.2749398420757788
+Bawang Putih,ojk_roe,2,-0.4738571786023448
+Bawang Putih,ojk_bopo,0,-0.13358180633100353
+Bawang Putih,ojk_bopo,1,-0.01571462813900173
+Bawang Putih,ojk_bopo,2,0.27946045161100735
+Bawang Putih,ojk_penyaluran_pertanian_miliar,0,0.10178354488804636
+Bawang Putih,ojk_penyaluran_pertanian_miliar,1,0.1601280079562241
+Bawang Putih,ojk_penyaluran_pertanian_miliar,2,0.07272738352703562
+Cabai Merah Keriting,ojk_tkb90,0,-0.47238521840580977
+Cabai Merah Keriting,ojk_tkb90,1,-0.4670003551566419
+Cabai Merah Keriting,ojk_tkb90,2,-0.34953118516355103
+Cabai Merah Keriting,ojk_twp90,0,0.4723852184058139
+Cabai Merah Keriting,ojk_twp90,1,0.4670003551566401
+Cabai Merah Keriting,ojk_twp90,2,0.34953118516353776
+Cabai Merah Keriting,ojk_roa,0,-0.03827509205915044
+Cabai Merah Keriting,ojk_roa,1,0.12917449465390304
+Cabai Merah Keriting,ojk_roa,2,0.18881900451593192
+Cabai Merah Keriting,ojk_roe,0,-0.14071238767004957
+Cabai Merah Keriting,ojk_roe,1,0.06573242541585132
+Cabai Merah Keriting,ojk_roe,2,0.1434945220060398
+Cabai Merah Keriting,ojk_bopo,0,0.09852209236079755
+Cabai Merah Keriting,ojk_bopo,1,-0.05989007339293874
+Cabai Merah Keriting,ojk_bopo,2,-0.08685703461052569
+Cabai Merah Keriting,ojk_penyaluran_pertanian_miliar,0,0.18657406546845354
+Cabai Merah Keriting,ojk_penyaluran_pertanian_miliar,1,0.24121415259739018
+Cabai Merah Keriting,ojk_penyaluran_pertanian_miliar,2,0.18497507158416734
+Cabai Rawit Merah,ojk_tkb90,0,0.006756706292283317
+Cabai Rawit Merah,ojk_tkb90,1,-0.24003848107670706
+Cabai Rawit Merah,ojk_tkb90,2,-0.09540382069055546
+Cabai Rawit Merah,ojk_twp90,0,-0.006756706292283295
+Cabai Rawit Merah,ojk_twp90,1,0.2400384810767043
+Cabai Rawit Merah,ojk_twp90,2,0.09540382069055782
+Cabai Rawit Merah,ojk_roa,0,0.12661205912623824
+Cabai Rawit Merah,ojk_roa,1,0.115035384569215
+Cabai Rawit Merah,ojk_roa,2,-0.1346452268466868
+Cabai Rawit Merah,ojk_roe,0,0.0724054587809444
+Cabai Rawit Merah,ojk_roe,1,0.08967271006562212
+Cabai Rawit Merah,ojk_roe,2,-0.1395943665851197
+Cabai Rawit Merah,ojk_bopo,0,-0.14275624147299137
+Cabai Rawit Merah,ojk_bopo,1,-0.1317219062783106
+Cabai Rawit Merah,ojk_bopo,2,-0.031017879080653114
+Cabai Rawit Merah,ojk_penyaluran_pertanian_miliar,0,0.21162368174107482
+Cabai Rawit Merah,ojk_penyaluran_pertanian_miliar,1,0.3192331013624397
+Cabai Rawit Merah,ojk_penyaluran_pertanian_miliar,2,0.34176710752735995
+Daging Sapi,ojk_tkb90,0,0.15499068066469157
+Daging Sapi,ojk_tkb90,1,-0.02769257388501421
+Daging Sapi,ojk_tkb90,2,-0.2307415683638433
+Daging Sapi,ojk_twp90,0,-0.15499068066469054
+Daging Sapi,ojk_twp90,1,0.027692573885016756
+Daging Sapi,ojk_twp90,2,0.23074156836384704
+Daging Sapi,ojk_roa,0,-0.3177565635194366
+Daging Sapi,ojk_roa,1,-0.36338253622400324
+Daging Sapi,ojk_roa,2,-0.6696354055499354
+Daging Sapi,ojk_roe,0,-0.2843145014756547
+Daging Sapi,ojk_roe,1,-0.3691961507445626
+Daging Sapi,ojk_roe,2,-0.7173966971698533
+Daging Sapi,ojk_bopo,0,-0.09095778542524321
+Daging Sapi,ojk_bopo,1,0.18704194656308104
+Daging Sapi,ojk_bopo,2,0.5259846277733853
+Daging Sapi,ojk_penyaluran_pertanian_miliar,0,-0.2632127727892291
+Daging Sapi,ojk_penyaluran_pertanian_miliar,1,0.14806915560301734
+Daging Sapi,ojk_penyaluran_pertanian_miliar,2,-0.23116049515471118
+Daging Ayam,ojk_tkb90,0,-0.4372357103377056
+Daging Ayam,ojk_tkb90,1,-0.44499796035988687
+Daging Ayam,ojk_tkb90,2,-0.010437538639897563
+Daging Ayam,ojk_twp90,0,0.43723571033770353
+Daging Ayam,ojk_twp90,1,0.44499796035988254
+Daging Ayam,ojk_twp90,2,0.010437538639899047
+Daging Ayam,ojk_roa,0,-0.21743438788413305
+Daging Ayam,ojk_roa,1,-0.19674051249528268
+Daging Ayam,ojk_roa,2,-0.22851693934668504
+Daging Ayam,ojk_roe,0,-0.21746908022844286
+Daging Ayam,ojk_roe,1,-0.1927174874263738
+Daging Ayam,ojk_roe,2,-0.23809580307577788
+Daging Ayam,ojk_bopo,0,-0.024846788207634786
+Daging Ayam,ojk_bopo,1,0.18264630773440263
+Daging Ayam,ojk_bopo,2,0.36471353465098366
+Daging Ayam,ojk_penyaluran_pertanian_miliar,0,0.12784281467010666
+Daging Ayam,ojk_penyaluran_pertanian_miliar,1,-0.09869976029232919
+Daging Ayam,ojk_penyaluran_pertanian_miliar,2,-0.17123170215396707
+Telur Ayam,ojk_tkb90,0,-0.48919678750173823
+Telur Ayam,ojk_tkb90,1,-0.5634039095097575
+Telur Ayam,ojk_tkb90,2,-0.3722626669780411
+Telur Ayam,ojk_twp90,0,0.4891967875017382
+Telur Ayam,ojk_twp90,1,0.5634039095097562
+Telur Ayam,ojk_twp90,2,0.37226266697803956
+Telur Ayam,ojk_roa,0,-0.03905239613534401
+Telur Ayam,ojk_roa,1,-0.111978816402121
+Telur Ayam,ojk_roa,2,-0.12873574824107123
+Telur Ayam,ojk_roe,0,-0.06750970651653355
+Telur Ayam,ojk_roe,1,-0.14976557934863194
+Telur Ayam,ojk_roe,2,-0.17566664575036034
+Telur Ayam,ojk_bopo,0,-0.15223709162265578
+Telur Ayam,ojk_bopo,1,0.1308072996881117
+Telur Ayam,ojk_bopo,2,0.3512738540259586
+Telur Ayam,ojk_penyaluran_pertanian_miliar,0,0.18151673915855396
+Telur Ayam,ojk_penyaluran_pertanian_miliar,1,-0.07799113845709049
+Telur Ayam,ojk_penyaluran_pertanian_miliar,2,-0.18016409773070774
+Gula Pasir,ojk_tkb90,0,0.008905772498676164
+Gula Pasir,ojk_tkb90,1,-0.09304566255738021
+Gula Pasir,ojk_tkb90,2,-0.32849951502840574
+Gula Pasir,ojk_twp90,0,-0.008905772498675163
+Gula Pasir,ojk_twp90,1,0.09304566255738149
+Gula Pasir,ojk_twp90,2,0.32849951502840485
+Gula Pasir,ojk_roa,0,0.5567591817206587
+Gula Pasir,ojk_roa,1,0.4241509574356651
+Gula Pasir,ojk_roa,2,0.27348543027100664
+Gula Pasir,ojk_roe,0,0.5392978485132681
+Gula Pasir,ojk_roe,1,0.3814530186702748
+Gula Pasir,ojk_roe,2,0.22703786658038475
+Gula Pasir,ojk_bopo,0,-0.7050286905699393
+Gula Pasir,ojk_bopo,1,-0.5646423242356363
+Gula Pasir,ojk_bopo,2,-0.34160268380387254
+Gula Pasir,ojk_penyaluran_pertanian_miliar,0,0.21142549033500635
+Gula Pasir,ojk_penyaluran_pertanian_miliar,1,0.13947302527017058
+Gula Pasir,ojk_penyaluran_pertanian_miliar,2,0.24895414979973735
+Minyak Goreng Kemasan,ojk_tkb90,0,-0.4149826183992614
+Minyak Goreng Kemasan,ojk_tkb90,1,-0.37506565205365433
+Minyak Goreng Kemasan,ojk_tkb90,2,-0.3112670183132954
+Minyak Goreng Kemasan,ojk_twp90,0,0.41498261839926054
+Minyak Goreng Kemasan,ojk_twp90,1,0.37506565205365316
+Minyak Goreng Kemasan,ojk_twp90,2,0.3112670183132883
+Minyak Goreng Kemasan,ojk_roa,0,0.8004039067592299
+Minyak Goreng Kemasan,ojk_roa,1,0.782562076496161
+Minyak Goreng Kemasan,ojk_roa,2,0.7691336483210571
+Minyak Goreng Kemasan,ojk_roe,0,0.7454259344937741
+Minyak Goreng Kemasan,ojk_roe,1,0.7294750173013524
+Minyak Goreng Kemasan,ojk_roe,2,0.7209165161473481
+Minyak Goreng Kemasan,ojk_bopo,0,-0.6726965139650722
+Minyak Goreng Kemasan,ojk_bopo,1,-0.6703184538329393
+Minyak Goreng Kemasan,ojk_bopo,2,-0.5567247855782348
+Minyak Goreng Kemasan,ojk_penyaluran_pertanian_miliar,0,0.25275411078867827
+Minyak Goreng Kemasan,ojk_penyaluran_pertanian_miliar,1,0.2698499852979279
+Minyak Goreng Kemasan,ojk_penyaluran_pertanian_miliar,2,0.26284670883791306
